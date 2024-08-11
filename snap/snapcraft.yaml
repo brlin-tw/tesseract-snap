@@ -30,11 +30,13 @@ apps:
 parts:
   tesseract:
     after: [leptonica]
-    source: .
+    source: https://github.com/tesseract-ocr/tesseract.git
+    source-depth: 500
     override-pull: |
       craftctl default
       "${CRAFT_PROJECT_DIR}/snap/local/selective-checkout" \
-        --beta-tag-pattern='-beta-[[:digit:]]+$'
+        --beta-tag-pattern='-beta-[[:digit:]]+$' \
+        --append-packaging-revision
     plugin: autotools
     build-packages:
       - pkg-config
