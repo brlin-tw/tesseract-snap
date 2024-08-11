@@ -22,8 +22,6 @@ distributions.</p>
 ![tesseract](screenshot.png?raw=true "tesseract")
 -->
 
-<p align="center">Published for <img src="https://raw.githubusercontent.com/anythingcodes/slack-emoji-for-techies/gh-pages/emoji/tux.png" align="top" width="24" /> with 💝 by Snapcrafters</p>
-
 <!-- Uncomment and modify this when your snap is available on the store
 ## Install
 
