@@ -43,17 +43,3 @@ jobs:
           repo-token: ${{ secrets.SNAPCRAFTERS_BOT_COMMIT }}
           store-token: ${{ secrets.SNAP_STORE_CANDIDATE }}
           snapcraft-channel: latest/edge
-  
-  
-  screenshots:
-    name: 📸 Gather screenshots
-    needs: call-for-testing
-    environment: "Candidate Branch"
-    runs-on: ubuntu-latest
-    steps:
-      - name: 📸 Gather screenshots
-        uses: snapcrafters/ci/get-screenshots@main
-        with:
-          issue-number: ${{ needs.call-for-testing.outputs.issue-number }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          screenshots-token: ${{ secrets.SNAPCRAFTERS_BOT_COMMIT }}
