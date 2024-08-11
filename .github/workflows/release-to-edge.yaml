@@ -44,20 +44,6 @@ jobs:
           store-token: ${{ secrets.SNAP_STORE_CANDIDATE }}
           snapcraft-channel: latest/edge
   
-  call-for-testing:
-    name: 📣 Create call for testing
-    needs: [release, get-architectures]
-    environment: "Candidate Branch"
-    runs-on: ubuntu-latest
-    outputs:
-      issue-number: ${{ steps.issue.outputs.issue-number }}
-    steps:
-      - name: 📣 Create call for testing
-        id: issue
-        uses: snapcrafters/ci/call-for-testing@main
-        with:
-          architectures: ${{ needs.get-architectures.outputs.architectures }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
   
   screenshots:
     name: 📸 Gather screenshots
