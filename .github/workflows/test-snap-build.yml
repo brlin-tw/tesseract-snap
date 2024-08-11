@@ -3,8 +3,9 @@ name: >
   runner
 
 on:
-  pull_request:
-    branches: [ "**" ]
+  push:
+    branches:
+      - master
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
