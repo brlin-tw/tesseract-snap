@@ -15,12 +15,12 @@ grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
 base: core22
 architectures:
-  - build-on: [amd64]
-  - build-on: [armhf]
-  - build-on: [arm64]
-  - build-on: [s390x]
-  - build-on: [ppc64el]
-  - build-on: [riscv64]
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: arm64
+  - build-on: s390x
+  - build-on: ppc64el
+  - build-on: riscv64
 
 apps:
   tesseract:
