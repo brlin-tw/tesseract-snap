@@ -35,11 +35,11 @@ jobs:
       matrix:
         architecture: ${{ fromJSON(needs.get-architectures.outputs.architectures-list) }}
     steps:
-      - name: 🚢 Release to latest/candidate
+      - name: 🚢 Release to latest/edge
         uses: snapcrafters/ci/release-to-candidate@main
         with:
           architecture: ${{ matrix.architecture }}
           launchpad-token: ${{ secrets.LP_BUILD_SECRET }}
           repo-token: ${{ secrets.SNAPCRAFTERS_BOT_COMMIT }}
-          store-token: ${{ secrets.SNAP_STORE_CANDIDATE }}
+          store-token: ${{ secrets.SNAP_STORE_EDGE }}
           snapcraft-channel: latest/edge
