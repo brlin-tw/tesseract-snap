@@ -36,7 +36,7 @@ jobs:
         architecture: ${{ fromJSON(needs.get-architectures.outputs.architectures-list) }}
     steps:
       - name: 🚢 Release to latest/edge
-        uses: snapcrafters/ci/release-to-candidate@main
+        uses: brlin-tw/snapcrafters-ci/release-to-candidate@drop-release-version-var-requirement
         with:
           architecture: ${{ matrix.architecture }}
           launchpad-token: ${{ secrets.LP_BUILD_SECRET }}
