@@ -16,7 +16,9 @@ confinement: strict
 base: core22
 architectures:
   - build-on: amd64
-  - build-on: armhf, arm64
+  - build-on:
+      - armhf
+      - arm64
     build-for: armhf
   - build-on: arm64
   - build-on: s390x
