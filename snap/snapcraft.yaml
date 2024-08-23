@@ -25,6 +25,8 @@ architectures:
 apps:
   tesseract:
     command: usr/local/bin/tesseract
+    command-chain:
+      - bin/tesseract-launch
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/local/lib
     plugs:
@@ -124,3 +126,32 @@ parts:
       - usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/*.so*
       - usr/local/lib/*.so*
       - usr/share/doc/*/copyright*
+
+  launchers:
+    plugin: nil
+    override-build: |
+      install_dir_opts=(
+        --mode 0755
+        --directory
+        --verbose
+      )
+      if ! install "${install_dir_opts[@]}" "${CRAFT_PART_INSTALL}/bin"; then
+        printf \
+          'Error: Unable to install the bin directory.\n' \
+          1>&2
+          exit 2
+      fi
+
+      install_opts=(
+        --mode 0755
+        --verbose
+      )
+      if ! install \
+        "${install_opts[@]}" \
+        "${CRAFT_PROJECT_DIR}/snap/local/tesseract-launch" \
+        "${CRAFT_PART_INSTALL}/bin/tesseract-launch"; then
+        printf \
+          'Error: Unable to install the snap maintenance launcher.\n' \
+          1>&2
+        exit 2
+      fi

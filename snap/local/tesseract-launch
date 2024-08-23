@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# This is the maintainence launcher for the snap, make necessary runtime
+# environment changes to make the snap work here.  You may also insert
+# security confinement/deprecation/obsoletion notice of the snap here.
+#
+# Copyright 2024 林博仁(Buo-ren Lin) <buo.ren.lin@gmail.com>
+# SPDX-License-Identifier: MIT
+
+# Configure defensive script interpreter behaviors
+set_opts=(
+    # Error when any commands' exit status is fail
+    -o errexit
+
+    # Error when any unset variables are referenced
+    -o nounset
+)
+if ! set "${set_opts[@]}"; then
+    printf \
+        'Error: Unable to configure defensive script interpreter behaviors.\n' \
+        1>&2
+    exit 2
+fi
+
+ownership_transfer_notice_shown_marker_file="${SNAP_USER_COMMON}/.snap-ownership-transfer-notice-shown.marker"
+if ! test -e "${ownership_transfer_notice_shown_marker_file}"; then
+    cat <<END_OF_OWNERSHIP_TRANSFER_NOTICE
+Snap ownership transfer notice
+==============================
+
+Hello!  This is 林博仁(Buo-ren Lin), the current publisher/maintainer of the Tesseract snap.
+
+I would like to inform you that the publisher/maintainer of this snap has been transferred
+to me, refer the following Snapcraft forum topic for more info regarding this change:
+
+    Ownership takeover request for the Tesseract OCR snap - store-requests - snapcraft.io
+    https://forum.snapcraft.io/t/ownership-takeover-request-for-the-tesseract-ocr-snap/40930
+
+If you do not wish to continue using this snap, press Ctrl+C in the next 60 seconds to
+terminate the snap's execution, and, run the following commands to remove the snap:
+
+    # Move Tesseract data out of the snap's user data directory
+    mkdir -p ~/tesseract-snap-data-backup
+    mv ~/snap/tesseract/common/* ~/tesseract-snap-data-backup
+
+    # Remove the snap from the system
+    sudo snap remove tesseract
+
+If you need any help feel free to file an issue on the snap's own issue tracker:
+
+    Issues · brlin-tw/tesseract-snap
+    https://github.com/brlin-tw/tesseract-snap/issues
+
+Thank you!
+
+This message should only display once, to permanently disable this message run the following
+command in a text terminal:
+
+    touch ${SNAP_USER_COMMON}/.snap-ownership-transfer-notice-shown.marker
+END_OF_OWNERSHIP_TRANSFER_NOTICE
+
+    # Intentionally delay a minute to make user aware of this notice without hanging the
+    # execution
+    sleep 60
+    touch "${SNAP_USER_COMMON}/.snap-ownership-transfer-notice-shown.marker"
+fi
+
+# Finally run the next part of the command chain
+exec "${@}"
