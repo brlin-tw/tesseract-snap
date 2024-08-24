@@ -1,4 +1,4 @@
-name: Release
+name: Release the snap to the store's edge channel
 
 on:
   # Run the workflow each time new commits are pushed to the master branch.
