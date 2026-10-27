@@ -83,7 +83,7 @@ jobs:
         run: ./continuous-integration/generate-release-description.sh
 
       - name: Publish the release archive to the GitHub Releases
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: ${{ env.project_id }} ${{ env.release_version }}
           files: |
