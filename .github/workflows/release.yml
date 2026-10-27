@@ -23,7 +23,7 @@ jobs:
       packages: write
     steps:
       - name: Check out content from the Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # Increase fetch depth if you may have more than this amount
           # of revisions between releases
