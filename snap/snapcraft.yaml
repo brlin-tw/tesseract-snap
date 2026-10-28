@@ -93,7 +93,7 @@ parts:
 
   leptonica:
     source: https://github.com/DanBloomberg/leptonica.git
-    source-tag: 1.84.1
+    source-tag: 1.87.0
     source-depth: 1
     plugin: autotools
     build-packages:
